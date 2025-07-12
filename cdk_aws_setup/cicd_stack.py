@@ -70,10 +70,10 @@ class CICDStack(cdk.Stack):
         prefix = "hpsi-dev-"
         dev_account = self.node.try_get_context("DevAccountID")
         dev_region = self.node.try_get_context("DevRegion")
-        dev_vpc = self.node.try_get_context("DevVpcId")
+        # dev_vpc = self.node.try_get_context("DevVpcId")
         env_dev = cdk.Environment(account=dev_account, region=dev_region)
         cicd_pipeline.add_stage(
-            CdkAwsSetupStage(self, "hpsi-DevStage", env_dev, dev_vpc, prefix)
+            CdkAwsSetupStage(self, "hpsi-DevStage", env_dev, prefix)
         )
 
         # dev_account = self.node.try_get_context("DevAccountID")
@@ -82,17 +82,17 @@ class CICDStack(cdk.Stack):
         # cicd_pipeline.add_stage(CdkAwsSetupStage(self, 'hpsi-DevStage', env_dev, prefix))
 
         # Prod Environment
-        prefix = "hpsi-prod-"
-        prod_account = self.node.try_get_context("ProdAccountID")
-        prod_region = self.node.try_get_context("ProdRegion")
-        env_prod = cdk.Environment(account=prod_account, region=prod_region)
-        cicd_pipeline.add_stage(
-            CdkAwsSetupStage(
-                self,
-                'hpsi-ProdStage',
-                env_prod, prefix),
-            pre=[ManualApprovalStep('PromoteToProd')]
-        )
+        # prefix = "hpsi-prod-"
+        # prod_account = self.node.try_get_context("ProdAccountID")
+        # prod_region = self.node.try_get_context("ProdRegion")
+        # env_prod = cdk.Environment(account=prod_account, region=prod_region)
+        # cicd_pipeline.add_stage(
+        #     CdkAwsSetupStage(
+        #         self,
+        #         'hpsi-ProdStage',
+        #         env_prod, prefix),
+        #     pre=[ManualApprovalStep('PromoteToProd')]
+        # )
 
         cicd_pipeline.build_pipeline()
 

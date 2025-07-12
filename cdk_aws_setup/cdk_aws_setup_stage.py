@@ -8,7 +8,9 @@ from cdk_aws_setup.cdk_aws_setup_stack import CdkAwsSetupStack
 
 
 class CdkAwsSetupStage(cdk.Stage):
-    def __init__(self, scope, construct_id, env=None, prefix=None, **kwargs, ):
+    def __init__(
+        self, scope, construct_id, env=None, prefix=None, **kwargs
+    ):
         super().__init__(scope, construct_id, env=env, **kwargs)
 
         # Setup logging
