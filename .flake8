@@ -1,0 +1,10 @@
+[flake8]
+max_complexity = 10
+extend-ignore = E265
+max-line-length = 150
+exclude=
+    *.pyc,
+    .venv,
+    .pytest_cache,
+    __pycache__,
+    cdk.out
