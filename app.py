@@ -3,7 +3,7 @@
 import os
 import logging
 import aws_cdk as cdk
-from cdk_aws_setup.cdk_aws_setup_stack import CdkAwsSetupStack
+from cdk_aws_setup.cicd_stack import CICDStack
 
 # Setup logging
 logging.basicConfig(
@@ -20,7 +20,7 @@ env_build = cdk.Environment(
 msg = f"app: CDK_DEFAULT_ACCOUNT: {env_build.account} - CDK_DEFAULT_REGION: {env_build.region}"
 logging.info(msg)
 
-CdkAwsSetupStack(app, "CdkAwsSetupStack", env_build)
+CICDStack(app, "CdkAwsSetupStack", env_build)
 # If you don't specify 'env', this stack will be environment-agnostic.
 # Account/Region-dependent features and context lookups will not work,
 # but a single synthesized template can be deployed anywhere.
