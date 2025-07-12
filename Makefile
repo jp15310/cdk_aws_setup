@@ -40,3 +40,6 @@ destroy:
 
 clean:
 	rm -rf $(VENV)
+
+lint:
+	flake8 .

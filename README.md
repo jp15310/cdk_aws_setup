@@ -113,7 +113,7 @@ cdk.out/
 ```
 > git checkout -b dev
 > git add.
-> git commit -m "Initialling..."
+> git commit -m "Initial Setup"
 > git push --set-upstream origin dev
 ```
 

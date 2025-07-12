@@ -91,6 +91,10 @@
     "@aws-cdk/s3-notifications:addS3TrustKeyPolicyForSnsSubscriptions": true,
     "@aws-cdk/aws-ec2:requirePrivateSubnetsForEgressOnlyInternetGateway": true,
     "@aws-cdk/aws-s3:publicAccessBlockedByDefault": true,
-    "@aws-cdk/aws-lambda:useCdkManagedLogGroup": true
+    "@aws-cdk/aws-lambda:useCdkManagedLogGroup": true,
+    "DevAccountID" : "557194064282",
+    "DevRegion" : "us-east-2",
+    "ProdAccountID" : "152915603097",
+    "ProdRegion" : "us-west-1"
   }
 }
