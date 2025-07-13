@@ -20,6 +20,16 @@ init:
 	python3 -m venv $(VENV)
 	$(ACTIVATE) && pip install --upgrade pip && source .venv/bin/activate && pip install -r requirements.txt
 
+install: $(VIRTUAL_ENV)
+	pip install -r requirements.txt
+
+clean:
+	[[ -d $(VIRTUAL_ENV) ]] && rm -rf $(VIRTUAL_ENV) || true
+	[[ -d .pytest_cache ]] && rm -rf .pytest_cache || true
+	[[ -d cdk.out ]] && rm -rf cdk.out || true
+	[[ -f .coverage ]] && rm .coverage || true
+	[[ -d cfnnag_output ]] && rm -rf cfnnag_output || true
+
 upgrade:
 	npm install -g aws-cdk
 	@if [ -d "$(VENV)" ]; then rm -rf $(VENV); fi
@@ -30,16 +40,19 @@ bootstrap:
 	$(ACTIVATE) && cdk bootstrap
 
 synth:
-	$(ACTIVATE) && cdk synth
+	$(ACTIVATE) && cdk synth --all
 
-deploy:
-	$(ACTIVATE) && cdk deploy --require-approval never
+diff:
+	cdk diff
+
+deploy: test
+	$(ACTIVATE) && cdk deploy --all --require-approval never
 
 destroy:
-	$(ACTIVATE) && cdk destroy --force
+	$(ACTIVATE) && cdk destroy --all --force
 
-clean:
-	rm -rf $(VENV)
+test: lint 
+	pytest --cov --cov-report term-missing
 
 lint:
 	flake8 .

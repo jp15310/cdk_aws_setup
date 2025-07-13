@@ -20,7 +20,7 @@ class CdkAwsSetupStage(cdk.Stage):
             level=logging.NOTSET
         )
 
-        msg = f"NetworkPipelineStage: CDK_DEFAULT_ACCOUNT: {env.account} - CDK_DEFAULT_REGION: {env.region} - PREFIX: {prefix}"
+        msg = f"CdkAwsSetupStage: CDK_DEFAULT_ACCOUNT: {env.account} - CDK_DEFAULT_REGION: {env.region} - PREFIX: {prefix}"
         logging.info(msg)
 
         CdkAwsSetupStack(self, 'hpsi-CdkAwsSetupStack', env, prefix)

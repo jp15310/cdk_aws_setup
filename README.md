@@ -74,6 +74,18 @@ with https://www.codeconvert.ai/typescript-to-python-converter
 - https://nordcloud.com/tech-community/automating-cicd-pipelines/
 
 ## Prerequesites
+### 0 - Update AWS CLI
+refs: 
+- https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html#:~:text=The%20command%20line%20installer%20is,team%20needs%20to%20pin%20versions
+
+```
+> which aws
+> aws --version
+
+# After running AWS CLI installer
+> aws --version
+```
+
 ### 1 - Update AWS CDK Version
 Run outside project folder
 ```
@@ -154,4 +166,9 @@ Using default profile:
 > cdk bootstrap aws://152915603097/us-west-1 --profile devops-cdk \
 --cloudformation-execution-policies "arn:aws:iam::aws:policy/AdministratorAccess" \
 --trust 005713840833 
+```
+
+### GitHub Connection with AWS CodePipeline
+```
+> aws codeconnections create-connection --provider-type GitHub --connection-name MyGitHubConnection
 ```
