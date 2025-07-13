@@ -12,7 +12,7 @@ from aws_cdk.pipelines import (
     CodePipeline,
     CodePipelineSource,
     ShellStep,
-    ManualApprovalStep
+    # ManualApprovalStep
 )
 from cdk_aws_setup.cdk_aws_setup_stage import CdkAwsSetupStage
 
@@ -50,8 +50,8 @@ class CICDStack(cdk.Stack):
                 id='Synth',
                 input=CodePipelineSource.connection(
                     'jp15310/cdk_aws_setup',
-                    branch='dev',
-                    connection_arn='arn:aws:codeconnections:us-east-1:005713840833:connection/f9d31d11-70f2-453a-b36a-28f91ea50aec'
+                    branch='main',
+                    connection_arn='arn:aws:codeconnections:us-east-1:005713840833:connection/072c0496-0509-4e3f-822d-0b70ec5a3c8b'
                 ),
                 install_commands=["npm install -g aws-cdk"],
                 commands=[
