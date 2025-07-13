@@ -1,20 +1,20 @@
 # Makefile for AWS CDK Python project
 SHELL = /bin/bash -c
-VENV := $(PWD)/.venv
+VENV := .venv
 ACTIVATE := source $(VENV)/bin/activate
+VIRTUAL_ENV = $(PWD)/.venv
 export BASH_ENV=$(VENV)/bin/activate
 
-$(VENV):
-	python3 -m venv $(VENV)
+$(VIRTUAL_ENV):
+	python3 -m venv $(VIRTUAL_ENV)
 
-# Default target
 .DEFAULT: help
 
 help:
 	@echo "Available targets:"
-	@echo "  make init        - Create and activate virtualenv, install requirements"
-	@echo "  make install     - Install / Update Python libraries"
-	@echo "  make clean       - Remove virtual environment"
+	@echo "  make install     - Createe virtualenv, install requirements"
+	@echo "  make clean       - Clean virtual environment"
+	@echo "  make kill        - Remove virtual environment"
 	@echo "  make upgrade     - Upgrade CDK CLI and Python packages"
 	@echo "  make bootstrap   - Bootstrap CDK environment"
 	@echo "  make synth       - Synthesize CloudFormation template"
@@ -24,12 +24,11 @@ help:
 	@echo "  make test.       - Execute test harness"
 	@echo "  make lint        - Validate python code structure using flake8"
 
-init:
-	python3 -m venv $(VENV)
-	$(ACTIVATE) && pip install --upgrade pip && source .venv/bin/activate && pip install -r requirements.txt
+install: $(VIRTUAL_ENV)
+	pip install --upgrade pip && pip install -r requirements.txt
 
-install: $(VENV)
-	pip install -r requirements.txt
+init: install
+	$(ACTIVATE)
 
 clean:
 	[[ -d $(VENV) ]] && rm -rf $(VENV) || true
@@ -48,7 +47,7 @@ bootstrap:
 	$(ACTIVATE) && cdk bootstrap
 
 synth:
-	$(ACTIVATE) && cdk synth --all
+	cdk synth --all
 
 diff:
 	cdk diff
