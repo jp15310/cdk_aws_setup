@@ -1,11 +1,15 @@
 # Makefile for AWS CDK Python project
 SHELL = /bin/bash -c
-VENV := .venv
+VENV := $(PWD)/.venv
 ACTIVATE := source $(VENV)/bin/activate
-# APP_CMD := --app \"python3 app.py\"
+export BASH_ENV=$(VENV)/bin/activate
+
+$(VENV):
+	python3 -m venv $(VENV)
 
 # Default target
-.PHONY: help
+.DEFAULT: help
+
 help:
 	@echo "Available targets:"
 	@echo "  make init        - Create and activate virtualenv, install requirements"
