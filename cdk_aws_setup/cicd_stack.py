@@ -58,7 +58,7 @@ class CICDStack(cdk.Stack):
                     "gem install cfn-nag",
                     "make install",  # Install necessary dependencies
                     "make lint",  # Run linting checks using flake8
-                    "cdk synth",  # "make synth" Generate CloudFormation template
+                    "make synth",  # "make synth" Generate CloudFormation template
                     "mkdir cfnnag_output",
                     "for template in $(find ./cdk.out -type f -maxdepth 2 -name '*.template.json'); do cp $template cfnnag_output; done",
                     "cfn_nag_scan --input-path cfnnag_output || true"

@@ -2,7 +2,7 @@
 SHELL = /bin/bash -c
 VENV := .venv
 ACTIVATE := source $(VENV)/bin/activate
-APP_CMD := --app \"python3 app.py\"
+# APP_CMD := --app \"python3 app.py\"
 
 # Default target
 .PHONY: help
@@ -17,18 +17,18 @@ help:
 	@echo "  make diff        - Perform a diff to see infrastructure changes between AWS CDK stacks"
 	@echo "  make deploy      - Deploy stack to AWS"
 	@echo "  make destroy     - Destroy deployed stack"
-	@echo "  make test     	  - Execute test harness"
+	@echo "  make test.       - Execute test harness"
 	@echo "  make lint        - Validate python code structure using flake8"
 
 init:
 	python3 -m venv $(VENV)
 	$(ACTIVATE) && pip install --upgrade pip && source .venv/bin/activate && pip install -r requirements.txt
 
-install: $(VIRTUAL_ENV)
+install: $(VENV)
 	pip install -r requirements.txt
 
 clean:
-	[[ -d $(VIRTUAL_ENV) ]] && rm -rf $(VIRTUAL_ENV) || true
+	[[ -d $(VENV) ]] && rm -rf $(VENV) || true
 	[[ -d .pytest_cache ]] && rm -rf .pytest_cache || true
 	[[ -d cdk.out ]] && rm -rf cdk.out || true
 	[[ -f .coverage ]] && rm .coverage || true
@@ -61,4 +61,4 @@ test: lint
 lint:
 	flake8 .
 
-$(VERBOSE).SILENT:
+# $(VERBOSE).SILENT:
