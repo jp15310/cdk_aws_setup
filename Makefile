@@ -1,5 +1,5 @@
 # Makefile for AWS CDK Python project
-
+SHELL = /bin/bash -c
 VENV := .venv
 ACTIVATE := source $(VENV)/bin/activate
 APP_CMD := --app \"python3 app.py\"
@@ -9,12 +9,16 @@ APP_CMD := --app \"python3 app.py\"
 help:
 	@echo "Available targets:"
 	@echo "  make init        - Create and activate virtualenv, install requirements"
+	@echo "  make install     - Install / Update Python libraries"
+	@echo "  make clean       - Remove virtual environment"
 	@echo "  make upgrade     - Upgrade CDK CLI and Python packages"
 	@echo "  make bootstrap   - Bootstrap CDK environment"
 	@echo "  make synth       - Synthesize CloudFormation template"
+	@echo "  make diff        - Perform a diff to see infrastructure changes between AWS CDK stacks"
 	@echo "  make deploy      - Deploy stack to AWS"
 	@echo "  make destroy     - Destroy deployed stack"
-	@echo "  make clean       - Remove virtual environment"
+	@echo "  make test     	  - Execute test harness"
+	@echo "  make lint        - Validate python code structure using flake8"
 
 init:
 	python3 -m venv $(VENV)
@@ -56,3 +60,5 @@ test: lint
 
 lint:
 	flake8 .
+
+$(VERBOSE).SILENT:
